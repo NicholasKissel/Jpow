@@ -503,16 +503,8 @@
     </div>
 
     <script>
-        // Jerome Powell image - multiple sources with automatic fallback
-        // Local file is checked first - add jpow.jpg, jpow.png, or jpow.webp to the project root
-        const imageSources = [
-            'jpow.jpg',  // Local file - add this to your project
-            'jpow.png',  // Alternative local file
-            'jpow.webp', // Alternative local file
-            'https://images.weserv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/4/4a/Jerome_Powell_official_portrait.jpg&w=800', // Wikimedia via CORS proxy
-            'https://cdn.britannica.com/06/227106-050-37C297FD/Jerome-Powell-2020.jpg', // Britannica CDN
-            'https://api.allorigins.win/raw?url=https://upload.wikimedia.org/wikipedia/commons/4/4a/Jerome_Powell_official_portrait.jpg' // CORS proxy alternative
-        ];
+        // Jerome Powell image - local file
+        const jpowImage = 'jpow.jpg';
 
         // Positive poems about JPow - 100 tributes to the Chairman
         const poems = [
@@ -988,34 +980,9 @@ In Jerome Powell, we trust.`
         ];
 
         function showRandom() {
-            // Show the JPow image with multiple fallback sources
+            // Show the JPow image
             const container = document.getElementById('mediaContainer');
-            const img = document.createElement('img');
-            img.alt = 'Jerome Powell - Chairman of the Federal Reserve';
-            
-            // Try image sources in order
-            let currentSourceIndex = 0;
-            const tryNextSource = () => {
-                if (currentSourceIndex < imageSources.length) {
-                    img.src = imageSources[currentSourceIndex];
-                    currentSourceIndex++;
-                } else {
-                    // All sources failed, use placeholder
-                    console.warn('All image sources failed, using placeholder');
-                    img.src = 'https://via.placeholder.com/500?text=IERONIMVS+POVELLVS';
-                }
-            };
-            
-            img.onerror = function() {
-                console.warn('Image failed to load, trying next source...');
-                tryNextSource();
-            };
-            
-            // Start with first source
-            tryNextSource();
-            
-            container.innerHTML = '';
-            container.appendChild(img);
+            container.innerHTML = `<img src="${jpowImage}" alt="Jerome Powell - Chairman of the Federal Reserve">`;
 
             // Pick random poem
             const randomPoem = poems[Math.floor(Math.random() * poems.length)];
