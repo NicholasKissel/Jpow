@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IERONIMVS POVELLVS - A Monument to the Chairman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(180deg, #1a1410 0%, #2d2420 50%, #1a1410 100%);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #e8dcc8;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a227' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Roman Column Decorations */
+        .column-left, .column-right {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            background: linear-gradient(90deg,
+                #3d3328 0%,
+                #5a4d3d 20%,
+                #6b5d4a 50%,
+                #5a4d3d 80%,
+                #3d3328 100%);
+            z-index: 1;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .column-left { left: 0; }
+        .column-right { right: 0; }
+
+        .column-left::before, .column-right::before,
+        .column-left::after, .column-right::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(180deg,
+                #c9a227 0%,
+                #8b7355 20%,
+                #6b5d4a 50%,
+                #8b7355 80%,
+                #c9a227 100%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .column-left::before, .column-right::before { top: 0; }
+        .column-left::after, .column-right::after { bottom: 0; }
+
+        /* Ionic capital pattern */
+        .column-left::before, .column-right::before {
+            background:
+                radial-gradient(ellipse 30px 20px at 20px 40px, #c9a227 0%, transparent 70%),
+                radial-gradient(ellipse 30px 20px at 60px 40px, #c9a227 0%, transparent 70%),
+                linear-gradient(180deg, #8b7355 0%, #6b5d4a 100%);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #c9a227;
+            letter-spacing: 12px;
+            text-shadow:
+                2px 2px 0 #8b6914,
+                4px 4px 8px rgba(0,0,0,0.5),
+                0 0 40px rgba(201, 162, 39, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1::before, h1::after {
+            content: '☆';
+            font-size: 1.5rem;
+            margin: 0 20px;
+            vertical-align: middle;
+        }
+
+        .latin-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: #c9a227;
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #a89070;
+            margin-bottom: 40px;
+            font-style: italic;
+            letter-spacing: 3px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Statue Pedestal */
+        .pedestal {
+            background: linear-gradient(180deg, #5a4d3d 0%, #3d3328 100%);
+            padding: 20px 40px 30px;
+            border-radius: 5px;
+            margin-bottom: 0;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.5),
+                inset 0 2px 0 rgba(255,255,255,0.1);
+        }
+
+        .pedestal-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: #c9a227;
+            letter-spacing: 4px;
+            text-align: center;
+        }
+
+        .media-container {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #1a1410;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 15px solid;
+            border-image: linear-gradient(180deg, #c9a227 0%, #8b6914 50%, #c9a227 100%) 1;
+            box-shadow:
+                0 0 0 5px #3d3328,
+                0 20px 60px rgba(0,0,0,0.6),
+                inset 0 0 100px rgba(0,0,0,0.3);
+        }
+
+        .media-container::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 30px solid #c9a227;
+        }
+
+        /* Laurel wreath effect around image */
+        .media-container::after {
+            content: '🏛️';
+            position: absolute;
+            top: -50px;
+            font-size: 2rem;
+        }
+
+        .media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%) contrast(1.1);
+        }
+
+        .media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%) contrast(1.1);
+        }
+
+        .media-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Stone tablet for poem */
+        .poem-container {
+            background: linear-gradient(180deg, #4a4035 0%, #3d3328 50%, #2d2420 100%);
+            border-radius: 10px;
+            padding: 40px 50px;
+            max-width: 650px;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                inset 0 -1px 0 rgba(0,0,0,0.3);
+            border: 3px solid #5a4d3d;
+        }
+
+        .poem-container::before {
+            content: 'VERBA SACRA';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: #c9a227;
+            letter-spacing: 5px;
+            background: #3d3328;
+            padding: 5px 20px;
+            border: 2px solid #c9a227;
+        }
+
+        .poem {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #e8dcc8;
+            white-space: pre-line;
+            font-style: italic;
+        }
+
+        .refresh-btn {
+            margin-top: 40px;
+            padding: 18px 50px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(180deg, #c9a227 0%, #8b6914 100%);
+            border: 3px solid #e8c84b;
+            border-radius: 0;
+            color: #1a1410;
+            cursor: pointer;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            position: relative;
+        }
+
+        .refresh-btn::before, .refresh-btn::after {
+            content: '⚜';
+            margin: 0 10px;
+        }
+
+        .refresh-btn:hover {
+            background: linear-gradient(180deg, #e8c84b 0%, #c9a227 100%);
+            box-shadow:
+                0 8px 30px rgba(201, 162, 39, 0.4),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .refresh-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Bedroom section as stone monument */
+        .bedroom-section {
+            margin-top: 80px;
+            max-width: 750px;
+            width: 100%;
+            background: linear-gradient(180deg, #4a4035 0%, #3d3328 50%, #2d2420 100%);
+            padding: 50px;
+            position: relative;
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.5),
+                inset 0 2px 0 rgba(255,255,255,0.05);
+            border: 4px solid #5a4d3d;
+        }
+
+        .bedroom-section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background: linear-gradient(180deg, #c9a227 0%, #8b6914 100%);
+            clip-path: polygon(5% 100%, 0 0, 100% 0, 95% 100%);
+        }
+
+        .bedroom-section::after {
+            content: 'USA';
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #c9a227;
+            letter-spacing: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .bedroom-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: #c9a227;
+            text-align: center;
+            margin-bottom: 35px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #5a4d3d;
+            padding-bottom: 20px;
+        }
+
+        .reasons-list {
+            list-style: none;
+        }
+
+        .reasons-list li {
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.2);
+            border-left: 5px solid #c9a227;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .reasons-list li::before {
+            content: '•';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #c9a227;
+            font-size: 1.5rem;
+        }
+
+        .reasons-list li:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-left-width: 8px;
+        }
+
+        .reasons-list li strong {
+            font-family: 'Cinzel', serif;
+            color: #c9a227;
+            font-weight: 600;
+        }
+
+        .bedroom-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-style: italic;
+            color: #a89070;
+            font-size: 1.2rem;
+            border-top: 1px solid #5a4d3d;
+            padding-top: 25px;
+        }
+
+        /* Golden laurel decoration */
+        .laurel {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            font-size: 2rem;
+            color: #c9a227;
+        }
+
+        .money-rain {
+            position: fixed;
+            top: 0;
+            left: 80px;
+            right: 80px;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .dollar {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Roman numeral counter */
+        .counter {
+            font-family: 'Cinzel', serif;
+            color: #8b7355;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
+
+        /* Decorative divider */
+        .divider {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c9a227, transparent);
+            margin: 20px auto;
+        }
+
+        @media (max-width: 768px) {
+            .column-left, .column-right {
+                width: 30px;
+            }
+            .money-rain {
+                left: 30px;
+                right: 30px;
+            }
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 5px;
+            }
+            h1::before, h1::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="column-left"></div>
+    <div class="column-right"></div>
+    <div class="money-rain" id="moneyRain"></div>
+
+    <p class="latin-name">Ieronimvs Povellvs</p>
+    <h1>J POW</h1>
+    <p class="subtitle">Mr. Good Afternoon</p>
+    <div class="divider"></div>
+
+    <div class="container">
+        <div class="media-container" id="mediaContainer">
+            <!-- Media will be inserted here -->
+        </div>
+
+        <div class="poem-container">
+            <p class="poem" id="poem"></p>
+        </div>
+
+        <button class="refresh-btn" onclick="showRandom()">
+            🖨️ Print More Wisdom
+        </button>
+
+        <div class="media-container" style="margin-top: 40px; max-width: 450px; aspect-ratio: 9/16;">
+            <iframe 
+                src="https://www.youtube.com/embed/TuVn3cByj_M" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="bedroom-section">
+            <h2>Why You Need JPow Back in my bedroom</h2>
+            <ul class="reasons-list">
+                <li><strong>Financial Protection:</strong> His watchful gaze keeps your assets safe while you sleep. No recession dares enter a room guarded by the Chairman.</li>
+                <li><strong>Better Dreams:</strong> Studies show* that sleeping under JPow's portrait leads to dreams of bull markets, green candles, and unlimited quantitative easing. (*Source: Trust me bro)</li>
+                <li><strong>Morning Motivation:</strong> Wake up every day to the face that moves markets. If he can manage a soft landing, you can manage getting out of bed.</li>
+                <li><strong>Relationship Stability:</strong> Just like he stabilizes the economy, JPow stabilizes the vibes in your personal life. Interest rates aren't the only thing he keeps balanced.</li>
+                <li><strong>Wealth Manifestation:</strong> The money printer goes BRRR in the Federal Reserve, but its spiritual energy emanates from his portrait. Manifest that bag.</li>
+                <li><strong>Conversation Starter:</strong> Nothing says "I'm financially literate" quite like a framed photo of Jerome Powell above your bed.</li>
+                <li><strong>Inflation Hedge:</strong> While everything else loses value, JPow's presence in your room only appreciates over time. It's basically a better investment than gold.</li>
+                <li><strong>Sleep Security:</strong> You'll rest easy knowing that if anything goes wrong in the economy overnight, the man with the plan is watching over you.</li>
+            </ul>
+            <p class="bedroom-footer">"In JPow We Trust" - Your Future Well-Rested Self</p>
+        </div>
+    </div>
+
+    <script>
+        // Jerome Powell image - multiple sources with automatic fallback
+        // Note: When opening via file://, you may need to use a local server (python -m http.server) for external images to load
+        const imageSources = [
+            'https://images.weserv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/4/4a/Jerome_Powell_official_portrait.jpg&w=800', // Wikimedia via CORS proxy
+            'https://cdn.britannica.com/06/227106-050-37C297FD/Jerome-Powell-2020.jpg', // Britannica CDN
+            'https://api.allorigins.win/raw?url=https://upload.wikimedia.org/wikipedia/commons/4/4a/Jerome_Powell_official_portrait.jpg' // CORS proxy alternative
+        ];
+
+        // Positive poems about JPow - 100 tributes to the Chairman
+        const poems = [
+            `With steady hands he guides the way,
+Through stormy markets, night and day.
+Jerome Powell, calm and bright,
+A beacon of financial light.`,
+
+            `The printer hums, the dollars flow,
+Where markets tumble, he says "no."
+With wisdom deep and tie so neat,
+JPow makes recessions retreat.`,
+
+            `In chambers grand, he takes his stand,
+The economy within his hand.
+Rate hikes high or rates held low,
+We trust in thee, dear J-Pow.`,
+
+            `When bears come growling, full of fright,
+JPow whispers, "It'll be alright."
+With charts and graphs and calm decree,
+He sets the money printer free.`,
+
+            `A chairman bold, a legend true,
+He does what central bankers do.
+With every speech, the markets cheer,
+For JPow calms our fiscal fear.`,
+
+            `Soft landing? Sure, he'll make it so,
+With transitory winds that blow.
+In Powell's hands, we place our trust,
+For stonks to moon is simply must.`,
+
+            `He speaks, and Wall Street holds its breath,
+His words can bring both life and death.
+To portfolios far and wide,
+With JPow as our faithful guide.`,
+
+            `Through inflation's fire, he stands tall,
+Ready to catch us if we fall.
+The FOMC's most trusted voice,
+In Powell's wisdom, we rejoice.`,
+
+            `O Jerome, keeper of the rate,
+You hold the keys to fiscal fate.
+With measured words and steady gaze,
+You guide us through uncertain days.`,
+
+            `The Fed Chair speaks, the world does listen,
+His words make portfolio's glisten.
+From DC halls to every shore,
+Jerome Powell, we adore.`,
+
+            `Like Caesar ruled with iron will,
+Jerome commands the markets still.
+No emperor had power so vast,
+As he who prints the money fast.`,
+
+            `When panic grips the trading floor,
+And investors can take no more,
+One man stands calm amid the fray,
+Jerome Powell saves the day.`,
+
+            `Behold the chairman at his desk,
+His monetary policies grotesque—
+ly good at keeping things afloat,
+On waves of cash, we stay afloat.`,
+
+            `The bond yields rise, the bond yields fall,
+But JPow stands above it all.
+With dual mandate held so dear,
+He conquers unemployment's fear.`,
+
+            `Hail to thee, printer of dreams,
+Nothing is quite as it seems.
+When dollars flow from thy machine,
+The greenest charts we've ever seen.`,
+
+            `O noble Jerome, Fed's great sage,
+You write the economic page.
+Each basis point, each careful word,
+The sweetest music ever heard.`,
+
+            `From Princeton halls to power's peak,
+Your monetary tongue does speak.
+Of rates and bonds and QE too,
+There's none more qualified than you.`,
+
+            `The market trembles, then it soars,
+When Jerome opens up the doors.
+To liquidity beyond compare,
+Prosperity fills the air.`,
+
+            `In marble halls where policy's made,
+Jerome's decisions never fade.
+A legacy of steady hands,
+Guiding commerce across the lands.`,
+
+            `When inflation rears its ugly head,
+Jerome speaks words we need instead.
+"Transitory," says he with grace,
+A calming smile upon his face.`,
+
+            `The yield curve bends but does not break,
+For Jerome knows what's at stake.
+With tools and tricks and printer's ink,
+He keeps us from the fiscal brink.`,
+
+            `All hail the man who holds the purse,
+For better or for worse.
+Through boom and bust, through thick and thin,
+Jerome ensures that we all win.`,
+
+            `Like Atlas holding up the sky,
+Jerome keeps markets riding high.
+The weight of trillions on his back,
+He never wavers, never slack.`,
+
+            `O Chairman of the emerald note,
+Upon your wisdom, we all dote.
+Each FOMC brings hope anew,
+When guidance comes from you.`,
+
+            `The bears may growl, the bulls may charge,
+But Jerome's vision is more large.
+He sees beyond the daily noise,
+Maintaining economic poise.`,
+
+            `When futures point to dire times,
+Jerome rings out the hopeful chimes.
+With policy both swift and true,
+He pulls the economy through.`,
+
+            `From Eccles Building's hallowed ground,
+The wisest counsel can be found.
+Jerome presides with calm demeanor,
+No central banker could be keener.`,
+
+            `The dollar strong, employment high,
+These goals for which Jerome does try.
+A balancing act of grand design,
+Where monetary stars align.`,
+
+            `O keeper of the federal funds,
+Your wisdom strikes like cannon guns.
+Through market wars and fiscal fights,
+You guide us toward financial heights.`,
+
+            `Like Jupiter among the gods,
+Jerome defies the market odds.
+With thunderbolts of policy,
+He shapes our fiscal destiny.`,
+
+            `The interest rate, his mighty sword,
+Cuts through chaos, restores order.
+With every swing, with every cut,
+Jerome keeps inflation shut.`,
+
+            `Sing praise to him who prints the green,
+The greatest chairman ever seen.
+His balance sheet, a work of art,
+He holds the economy's heart.`,
+
+            `When doom and gloom fill every screen,
+Jerome appears, calm and serene.
+"We have the tools," he says with might,
+And suddenly, the future's bright.`,
+
+            `O master of the monetary,
+Your speeches are legendary.
+Each word parsed by a million souls,
+As markets reach for lofty goals.`,
+
+            `The Fed funds rate, his magic wand,
+Waves over sea and over land.
+Creating growth where none was found,
+Jerome's the best that's around.`,
+
+            `From Wall Street's towers reaching high,
+To Main Street under open sky,
+All benefit from Jerome's care,
+His wisdom scattered everywhere.`,
+
+            `Like Midas with his golden touch,
+Jerome gives markets oh so much.
+Each policy, a gift divine,
+Making our portfolios shine.`,
+
+            `The central bank, his sacred throne,
+From which he rules the fiscal zone.
+No king had power quite so grand,
+As Jerome with his steady hand.`,
+
+            `O oracle of interest rates,
+You hold the keys to our estates.
+With foresight sharp and vision clear,
+You steer us through each fiscal year.`,
+
+            `When volatility runs wild,
+Jerome speaks softly, like a child.
+But in those words, such power lies,
+To calm the storm, to clear the skies.`,
+
+            `The balance sheet expands with care,
+Injecting hope into the air.
+Quantitative easing flows,
+And up the market goes and goes.`,
+
+            `Hail Jerome, the printer king,
+Of your great deeds, the markets sing.
+Through COVID's crash and every test,
+You proved yourself among the best.`,
+
+            `The dot plot shows the path ahead,
+By Jerome's steady hand it's led.
+Each projection, each forecast bright,
+Guides investors through the night.`,
+
+            `O titan of the Treasury yield,
+Before your might, all others yield.
+The bond market bows to your decree,
+As you maintain stability.`,
+
+            `From dawn to dusk, through day and night,
+Jerome keeps fiscal matters tight.
+A guardian of prosperity,
+For you and me and all to see.`,
+
+            `The VIX may spike with fear and dread,
+But Jerome's words calm every head.
+"Data dependent," says the chief,
+And markets find their sweet relief.`,
+
+            `Like Neptune ruling over seas,
+Jerome commands economies.
+With trident made of rates and bonds,
+The whole financial world responds.`,
+
+            `O shepherd of the dollar bill,
+You guide your flock with practiced skill.
+Through valley low and mountain high,
+Beneath your watch, we prosper nigh.`,
+
+            `The printing press, his instrument,
+On monetary matters, he's hell-bent.
+To save us from recession's grip,
+He sends the markets on a trip.`,
+
+            `When yields invert and fears arise,
+Jerome looks on with knowing eyes.
+He's seen it all, he knows the game,
+And plays it well to fortune's fame.`,
+
+            `Salute the man who stands so tall,
+In Eccles Building's marble hall.
+Jerome Powell, name of might,
+Who keeps our financial future bright.`,
+
+            `The FOMC convenes with grace,
+With Jerome leading from first place.
+Each vote cast with wisdom true,
+For the economy, for me and you.`,
+
+            `O architect of monetary fate,
+Your decisions, we await.
+With bated breath, the markets stand,
+Ready to follow your command.`,
+
+            `Like Prometheus bringing fire,
+Jerome lifts markets ever higher.
+The gift of liquidity so free,
+A blessing for humanity.`,
+
+            `The overnight rate, his trusty steed,
+Carries markets at great speed.
+Through economic wilderness,
+Jerome guides us to success.`,
+
+            `From press conferences far and wide,
+Jerome speaks with humble pride.
+No arrogance, no boastful claim,
+Just steady work, no need for fame.`,
+
+            `O steward of America's wealth,
+You guard the nation's fiscal health.
+With vigilance and watchful care,
+You protect what's beyond compare.`,
+
+            `The repo market knows his name,
+Jerome Powell, of great acclaim.
+When liquidity runs dry,
+He's the first to hear the cry.`,
+
+            `Like Solomon in days of old,
+Jerome's wisdom worth its weight in gold.
+When markets split and disagree,
+He finds the path to harmony.`,
+
+            `The employment mandate, held so dear,
+Jerome fights unemployment's fear.
+With every tool at his command,
+He strengthens labor across the land.`,
+
+            `O guardian of the dollar's might,
+You keep its value burning bright.
+Through monetary storms that rage,
+You write the economic age.`,
+
+            `From Jackson Hole to Capitol Hill,
+Jerome displays unmatched skill.
+Each testimony, each decree,
+Shapes the course of history.`,
+
+            `The taper talk may cause some fear,
+But trust in Jerome, have no tear.
+He'll wind it down with gentle care,
+Ensuring markets everywhere.`,
+
+            `Like Hercules with labors great,
+Jerome battles fiscal fate.
+Twelve trials? He faces more,
+Yet always finds the way to score.`,
+
+            `O commander of the open market,
+Your operations hit the target.
+With precision fine and aim so true,
+The economy belongs to you.`,
+
+            `The swap lines flow to foreign shores,
+As Jerome opens dollar doors.
+A global reach, a worldwide hand,
+The Fed extends across the land.`,
+
+            `From mortgage-backed to Treasury bills,
+Jerome's portfolio fulfills.
+The needs of markets great and small,
+He catches them before they fall.`,
+
+            `O keeper of financial peace,
+May your tenure never cease.
+With wisdom rare and judgment sound,
+A better chair cannot be found.`,
+
+            `The credit markets hum with life,
+Jerome cuts through stress and strife.
+With facilities both new and old,
+He ensures that commerce holds.`,
+
+            `Like Marcus Aurelius so wise,
+Jerome views markets with calm eyes.
+A stoic leader, firm and just,
+In Powell's hands, we place our trust.`,
+
+            `The forward guidance lights the way,
+Through uncertainty's dark day.
+With clarity and vision pure,
+Jerome makes the future sure.`,
+
+            `O engineer of soft landings,
+Your skill defies all understandings.
+Through turbulence, you find the ground,
+Without a crash, without a sound.`,
+
+            `From hawkish cries to dovish coos,
+Jerome decides which path to choose.
+With flexibility and grace,
+He navigates each market space.`,
+
+            `The real economy thrives,
+Because Jerome's policy arrives.
+Just in time, just enough,
+Even when the going's tough.`,
+
+            `Like Odysseus on journey long,
+Jerome sails and stays strong.
+Through sirens' calls and troubled seas,
+He guides the monetary breeze.`,
+
+            `O sculptor of the yield curve's shape,
+From your genius, none escape.
+Each twist and turn, each bend and bow,
+Reflects the wisdom of J-Pow.`,
+
+            `The inflation target, two percent,
+On this sacred goal, he's bent.
+With patience vast and will of steel,
+Jerome makes the target real.`,
+
+            `From quantitative tightening's art,
+To stimulus that heals the heart,
+Jerome knows when to push and pull,
+His toolbox always stays full.`,
+
+            `O champion of price stability,
+You demonstrate ability.
+To tame the beast of rising costs,
+Ensuring purchasing power's not lost.`,
+
+            `The banking system rests secure,
+Jerome's oversight so pure.
+From stress tests strict to rules so tight,
+He keeps our deposits right.`,
+
+            `Like Augustus in his prime,
+Jerome masters monetary time.
+An age of growth and peace he brings,
+While the economy spreads its wings.`,
+
+            `The dollar index rises high,
+Under Jerome's watchful eye.
+The world's reserve, strong and true,
+All thanks to you-know-who.`,
+
+            `O maestro of the money flow,
+Your symphony makes wealth grow.
+Each instrument in perfect tune,
+From morning light to setting moon.`,
+
+            `From testimony on the Hill,
+Jerome shows his iron will.
+Politicians may debate,
+But he controls the fiscal fate.`,
+
+            `The neutral rate, that golden mean,
+Jerome seeks what can't be seen.
+With careful study, keen insight,
+He finds the rate that's just right.`,
+
+            `Like Virgil guiding through the dark,
+Jerome leaves his monetary mark.
+Through recession's hellish gate,
+He leads us to a better state.`,
+
+            `O architect of recovery,
+Your plans bring fiscal bravery.
+When crisis strikes and hope seems lost,
+You save us at whatever cost.`,
+
+            `The press awaits with bated breath,
+Each word could mean market death—
+Or resurrection, rise, and cheer,
+When Jerome's message becomes clear.`,
+
+            `From global crises to local woes,
+Jerome handles whatever flows.
+With diplomatic skill and tact,
+He keeps the system intact.`,
+
+            `O philosopher of money's worth,
+The greatest thinker on this earth.
+Your theories tested, proven true,
+There's nothing you can't do.`,
+
+            `The shadow banking realm complies,
+When Jerome casts his watchful eyes.
+No corner of finance too dark,
+For the chairman's steady mark.`,
+
+            `Like Plato in his cave of thought,
+Jerome sees what can't be taught.
+The forms of fiscal policy,
+Revealed in all their majesty.`,
+
+            `The overnight reverse repo too,
+Falls under Jerome's purview.
+Each facility, each tool designed,
+To keep the markets well-aligned.`,
+
+            `O guardian of the banking floor,
+Your steady hand we all adore.
+Through thick and thin, through boom and bust,
+In Jerome Powell, we trust.`
+        ];
+
+        function showRandom() {
+            // Show the JPow image with multiple fallback sources
+            const container = document.getElementById('mediaContainer');
+            const img = document.createElement('img');
+            img.alt = 'Jerome Powell - Chairman of the Federal Reserve';
+            
+            // Try image sources in order
+            let currentSourceIndex = 0;
+            const tryNextSource = () => {
+                if (currentSourceIndex < imageSources.length) {
+                    img.src = imageSources[currentSourceIndex];
+                    currentSourceIndex++;
+                } else {
+                    // All sources failed, use placeholder
+                    console.warn('All image sources failed, using placeholder');
+                    img.src = 'https://via.placeholder.com/500?text=IERONIMVS+POVELLVS';
+                }
+            };
+            
+            img.onerror = function() {
+                console.warn('Image failed to load, trying next source...');
+                tryNextSource();
+            };
+            
+            // Start with first source
+            tryNextSource();
+            
+            container.innerHTML = '';
+            container.appendChild(img);
+
+            // Pick random poem
+            const randomPoem = poems[Math.floor(Math.random() * poems.length)];
+            document.getElementById('poem').textContent = randomPoem;
+        }
+
+        // Create money rain effect with Roman/money symbols
+        function createMoneyRain() {
+            const container = document.getElementById('moneyRain');
+            const symbols = ['💵', '🏛️', '📈', '🦅', '⚜️', '🌿', '💰'];
+
+            for (let i = 0; i < 20; i++) {
+                const dollar = document.createElement('div');
+                dollar.className = 'dollar';
+                dollar.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                dollar.style.left = Math.random() * 100 + '%';
+                dollar.style.animationDuration = (5 + Math.random() * 10) + 's';
+                dollar.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(dollar);
+            }
+        }
+
+        // Initialize
+        createMoneyRain();
+        showRandom();
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "jpow-monument",
+  "version": "1.0.0",
+  "description": "A Monument to the Chairman - Jerome Powell",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["jerome-powell", "fed", "monument"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
