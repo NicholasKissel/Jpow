@@ -504,8 +504,11 @@
 
     <script>
         // Jerome Powell image - multiple sources with automatic fallback
-        // Note: When opening via file://, you may need to use a local server (python -m http.server) for external images to load
+        // Local file is checked first - add jpow.jpg, jpow.png, or jpow.webp to the project root
         const imageSources = [
+            'jpow.jpg',  // Local file - add this to your project
+            'jpow.png',  // Alternative local file
+            'jpow.webp', // Alternative local file
             'https://images.weserv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/4/4a/Jerome_Powell_official_portrait.jpg&w=800', // Wikimedia via CORS proxy
             'https://cdn.britannica.com/06/227106-050-37C297FD/Jerome-Powell-2020.jpg', // Britannica CDN
             'https://api.allorigins.win/raw?url=https://upload.wikimedia.org/wikipedia/commons/4/4a/Jerome_Powell_official_portrait.jpg' // CORS proxy alternative
